@@ -5,10 +5,10 @@ import { cookies } from 'next/headers'
 import { addUserToDB, getAllUsersFromDB } from './redis'
 
 
-const cookieStore = cookies()
 
 export async function createUsername(username: string) {
     try {
+        const cookieStore = cookies()
         const {users, success} = await getAllUsersFromDB();
         if(!success) {
             return { success: false, message: 'something went wrong while creating the username.' }
@@ -25,5 +25,6 @@ export async function createUsername(username: string) {
     }
 }
 export async function getUsername() {
+    const cookieStore = cookies()
   return cookieStore.get('username')?.value;
 }
