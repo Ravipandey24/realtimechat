@@ -13,7 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { ZodError, set } from "zod";
+import { ZodError } from "zod";
 
 
 const WelcomeCard = ({}) => {

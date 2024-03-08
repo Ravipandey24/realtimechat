@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Badge, Button, Card, Input, Tooltip } from "@nextui-org/react";
+import { Avatar, Button, Card, Input, Tooltip } from "@nextui-org/react";
 import { FC, useEffect, useRef, useState } from "react";
 import { IconSendMessage, LogoutIcon } from "../Icons";
 import { Message } from "@/lib/validations";
@@ -8,10 +8,10 @@ import { cn, parseDateToTime } from "@/lib/utils";
 import { logout, sendMessageToGeneralChat } from "@/db/actions";
 import { pusherClient } from "@/lib/pusher";
 import { ScrollShadow } from "@nextui-org/react";
-import { nanoid } from "nanoid";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
 
 interface ChatSectionProps {
   username: string;
@@ -48,13 +48,8 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
   const sendMessage = async () => {
     // send message to the server
     if (!newMessage) return;
-    const messageObject: Message = {
-      id: nanoid(),
-      sender: username,
-      text: newMessage,
-      timestamp: Date.now(),
-    };
-    await sendMessageToGeneralChat(messageObject);
+    const payload = { username, message: newMessage};
+    await sendMessageToGeneralChat(payload);
     setNewMessage("");
   };
 

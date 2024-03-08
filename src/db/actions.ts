@@ -8,7 +8,7 @@ import {
   deleteUserFromDB,
   getAllUsersFromDB,
 } from "./redis";
-import { Message, messageValidator } from "@/lib/validations";
+import { messageValidator } from "@/lib/validations";
 import { nanoid } from "nanoid";
 import { pusherServer } from "@/lib/pusher";
 
@@ -52,9 +52,20 @@ export async function logout(username: string) {
   }
 }
 
-export async function sendMessageToGeneralChat(message: Message) {
+export async function sendMessageToGeneralChat({
+  username,
+  message,
+}: {
+  username: string;
+  message: string;
+}) {
   try {
-    const messageObject = messageValidator.parse(message);
+    const messageObject = messageValidator.parse({
+      id: nanoid(),
+      sender: username,
+      text: message,
+      timestamp: Date.now(),
+    });
     await addMessageToGeneralChatDB(messageObject);
     await pusherServer.trigger("general-chat", "incoming-message", message);
   } catch (error) {
