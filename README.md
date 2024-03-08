@@ -1,6 +1,6 @@
-# Real Time Chat
+# Real-Time Chat
 
-This project is a Real Time Chat application that allows users to communicate with each other in real time. 
+This project is a real-time chat application that allows users to communicate with each other in real time. 
 
 **Tech Stack:** Next.js, TailwindCSS, NextUI, Pusher, Redis.
 
