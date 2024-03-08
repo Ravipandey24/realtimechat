@@ -104,6 +104,7 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
                   "flex flex-row items-end gap-2 ",
                   isSenderUser(sender) && "justify-end"
                 )}
+                key={index + 'message'}
               >
                 <Card
                   className={cn(
