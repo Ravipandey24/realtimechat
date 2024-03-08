@@ -8,7 +8,7 @@ const page = async ({}) => {
   const { messages } = await getAllMessagesFromGeneralChat();
   return (
     <DotBackground>
-      <ChatSection username={username} initialMessages={messages}></ChatSection>
+      <ChatSection username={username} initialMessages={messages.reverse()}></ChatSection>
     </DotBackground>
   );
 };

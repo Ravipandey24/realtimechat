@@ -18,6 +18,16 @@ export const addUserToDB = async (username: string) => {
   }
 }
 
+export const deleteUserFromDB = async (username: string) => {
+  try {
+    await redis.srem('users', username)
+    return { success: true, message: 'User deleted successfully!' }
+  } catch (error) {
+    console.error(error)
+    return { success: false, message: 'An error occurred while deleting the user.' }
+  }
+}
+
 export const getAllUsersFromDB = async () => {
   try {
     const users = await redis.smembers('users')
@@ -28,7 +38,7 @@ export const getAllUsersFromDB = async () => {
   }
 }
 
-export const addMessageToGeneralChat = async (message: Message) => {
+export const addMessageToGeneralChatDB = async (message: Message) => {
   try {
     await redis.lpush('general:chat', message)
     return { success: true, message: 'Message sent successfully!' }
