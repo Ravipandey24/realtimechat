@@ -70,9 +70,9 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
 
   return (
     <div className="flex container mx-auto flex-col h-full">
-      <header className="flex items-center justify-between p-4 border-b">
+      <header className="sticky bg-black/40 z-10 flex items-center justify-between px-4 py-3.5 border-b border-gray-600">
         <div className="flex justify-between w-full items-center gap-4">
-          <h2 className="text-xl font-bold text-gray-200">General Chat</h2>
+          <h2 className="text-xl font-bold text-gray-600">General Chat</h2>
           <Tooltip offset={-3} content="logout" color="danger">
             <Button isIconOnly variant="light" color="danger" onClick={onLogout}>
               <LogoutIcon></LogoutIcon>
@@ -80,8 +80,8 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
           </Tooltip>
         </div>
       </header>
-      <ScrollShadow hideScrollBar>
-        <div className="flex h-[calc(100vh-10rem)] flex-grow flex-col justify-end py-4 space-y-4">
+      <ScrollShadow className="h-[calc(100vh-10rem)]" hideScrollBar>
+        <div className="flex h-full flex-grow flex-col justify-end pt-4 px-4 space-y-4">
           <AnimatePresence>
             {allMessage.length !== 0 ? allMessage.map(({ sender, text, timestamp}, index) => (
               <motion.div

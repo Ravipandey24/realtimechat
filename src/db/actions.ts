@@ -55,8 +55,8 @@ export async function logout(username: string) {
 export async function sendMessageToGeneralChat(message: Message) {
   try {
     const validatedMessage = messageValidator.parse(message);
-    await addMessageToGeneralChatDB(validatedMessage);
     await pusherServer.trigger("general-chat", "incoming-message", validatedMessage);
+    await addMessageToGeneralChatDB(validatedMessage);
   } catch (error) {
     console.error(error);
   }
