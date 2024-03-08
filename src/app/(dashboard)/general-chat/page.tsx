@@ -3,7 +3,7 @@ import { DotBackground } from "@/components/widgets/Backgrounds";
 import { getUsername } from "@/db/actions";
 import { getAllMessagesFromGeneralChat } from "@/db/redis";
 
-const page = async ({}) => {
+export default async function Page(){
   const username = (await getUsername()) as string;
   const { messages } = await getAllMessagesFromGeneralChat();
   return (
@@ -13,4 +13,3 @@ const page = async ({}) => {
   );
 };
 
-export default page;
