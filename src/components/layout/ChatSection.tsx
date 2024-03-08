@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Button, Card, Input, Tooltip } from "@nextui-org/react";
+import { Avatar, Button, Card, Input, Tooltip, divider } from "@nextui-org/react";
 import { FC, useEffect, useRef, useState } from "react";
 import { IconSendMessage, LogoutIcon } from "../Icons";
 import { Message } from "@/lib/validations";
@@ -48,8 +48,13 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
   const sendMessage = async () => {
     // send message to the server
     if (!newMessage) return;
-    const payload = { username, message: newMessage};
-    await sendMessageToGeneralChat(payload);
+    const message:Message = {
+      sender: username,
+      text: newMessage,
+      timestamp: Date.now(),
+    };
+
+    await sendMessageToGeneralChat(message);
     setNewMessage("");
   };
 
@@ -76,9 +81,9 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
         </div>
       </header>
       <ScrollShadow hideScrollBar>
-        <div className="flex flex-grow flex-col justify-end p-4 space-y-4">
+        <div className="flex h-[calc(100vh-10rem)] flex-grow flex-col justify-end py-4 space-y-4">
           <AnimatePresence>
-            {allMessage.map(({ sender, text, timestamp, id }, index) => (
+            {allMessage.length !== 0 ? allMessage.map(({ sender, text, timestamp}, index) => (
               <motion.div
                 initial={{ opacity: 0, scale: 1, y: 50, x: 0 }}
                 animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
@@ -99,7 +104,6 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
                   "flex flex-row items-end gap-2 ",
                   isSenderUser(sender) && "justify-end"
                 )}
-                key={id}
               >
                 <Card
                   className={cn(
@@ -135,7 +139,9 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
                 </Card>
                 <Avatar size="sm" showFallback />
               </motion.div>
-            ))}
+            )): <div className="flex justify-center">
+              <span className="text-gray-500">initiate a conversation...</span>
+              </div>}
           </AnimatePresence>
           <div ref={messagesEndRef} />
         </div>
