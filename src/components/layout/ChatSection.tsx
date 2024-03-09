@@ -80,8 +80,8 @@ const ChatSection: FC<ChatSectionProps> = ({ username, initialMessages }) => {
           </Tooltip>
         </div>
       </header>
-      <ScrollShadow className="h-[calc(100vh-10rem)]" hideScrollBar>
-        <div className="flex h-full flex-grow flex-col justify-end pt-4 px-4 space-y-4">
+      <ScrollShadow hideScrollBar>
+        <div className="flex min-h-[calc(100vh-10rem)] flex-grow flex-col justify-end pt-4 px-4 space-y-4">
           <AnimatePresence>
             {allMessage.length !== 0 ? allMessage.map(({ sender, text, timestamp}, index) => (
               <motion.div
