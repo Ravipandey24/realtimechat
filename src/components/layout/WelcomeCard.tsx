@@ -9,6 +9,7 @@ import {
   CardFooter,
   CardHeader,
   Input,
+  Spinner,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,12 +20,15 @@ import { ZodError } from "zod";
 const WelcomeCard = ({}) => {
   const [username, setUsername] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isSendingRequest, setSendingRequest] = useState<boolean>(false);
   const router = useRouter();
 
   const onSubmit = async () => {
     try {
       const validatedUsername = usernameValidator.parse(username.trim());
+      setSendingRequest(true);
       const {success, message} = await createUsername(validatedUsername);
+      setSendingRequest(false);
       if (success) {
         toast.success(message);
         router.push("/general-chat");
@@ -69,6 +73,9 @@ const WelcomeCard = ({}) => {
           color="primary"
           variant="shadow"
           onClick={onSubmit}
+          isLoading={isSendingRequest}
+          isDisabled={isSendingRequest}
+          spinner={<Spinner color="default" size="sm"></Spinner>}
         >
           Submit
         </Button>
