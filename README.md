@@ -1,12 +1,14 @@
-# Real Time Chat
+# Real-Time Chat
 
-This project is a Real Time Chat application that allows users to communicate with each other in real time. 
+This project is a real-time chat application that allows users to communicate with each other in real time. 
 
-**Tech Stack:** Next.js, TailwindCSS, NextUI, Pusher, Redis
+**Tech Stack:** Next.js, TailwindCSS, NextUI, Pusher, Redis.
 
+Mechanism :-
+
+![realtimechat_mapper](https://github.com/Ravipandey24/realtimechat/assets/79630119/83e3f9d3-6cae-44c6-ad37-c6adb59298ce)
 
 - *why using pusher?* because vercel's Serverless Functions [don't support WebSocket](https://vercel.com/guides/do-vercel-serverless-functions-support-websocket-connections).
-
 
 ## Run Locally
 
